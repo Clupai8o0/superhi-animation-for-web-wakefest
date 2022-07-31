@@ -5,91 +5,99 @@ const figcaptions = document.querySelectorAll("figcaption");
 const cursor = document.querySelector("div.cursor");
 const cursorOuter = document.querySelector("div.cursor-outer");
 
-const motion = window.matchMedia("(prefers-reduced-motion: no-preference)");
-const large = window.matchMedia("(min-width: 600px)");
+const mq = window.matchMedia(
+	"(prefers-reduced-motion: no-preference) and (min-width: 600px)"
+);
 
-if (motion.matches && large.matches) {
-	// mainTag.style.position = "fixed";
-	// mainTag.style.top = "0";
-	// mainTag.style.left = "0";
-	mainTag.style.width = "100%";
+const runScripts = () => {
+	if (mq.matches) {
+		// mainTag.style.position = "fixed";
+		// mainTag.style.top = "0";
+		// mainTag.style.left = "0";
+		mainTag.style.width = "100%";
 
-	const observer = new IntersectionObserver(
-		(entries) => {
-			entries.forEach((entry) => {
-				if (entry.intersectionRatio > 0.25) {
-					entry.target.classList.add("in-view");
-				}
-			});
-		},
-		{
-			threshold: [0, 0.25, 1],
-		}
-	);
-	figcaptions.forEach((caption) => {
-		observer.observe(caption);
-	});
-
-	let currentScroll = 0;
-	let aimScroll = 0;
-
-	const changeScroll = function () {
-		bodyTag.style.height = mainTag.offsetHeight + "px";
-		currentScroll = currentScroll + (aimScroll - currentScroll) * 0.0005;
-
-		mainTag.style.top = -1 * currentScroll + "px";
-
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.intersectionRatio > 0.25) {
+						entry.target.classList.add("in-view");
+					}
+				});
+			},
+			{
+				threshold: [0, 0.25, 1],
+			}
+		);
 		figcaptions.forEach((caption) => {
-			const box = caption.getBoundingClientRect();
-			const midY = box.y + box.height / 2;
-			const midScreen = window.innerHeight / 2;
-			const diff = midY - midScreen;
-
-			const images = caption.querySelectorAll("img");
-			images.forEach((image, i) => {
-				const speed = 0.1 + 0.1 * i;
-				image.style.top = diff * speed + "px";
-			});
+			observer.observe(caption);
 		});
 
-		requestAnimationFrame(changeScroll);
-	};
+		let currentScroll = 0;
+		let aimScroll = 0;
 
-	window.addEventListener("scroll", () => {
-		aimScroll += window.scrollY;
-	});
+		const changeScroll = function () {
+			bodyTag.style.height = mainTag.offsetHeight + "px";
+			currentScroll = currentScroll + (aimScroll - currentScroll) * 0.0005;
 
-	changeScroll();
+			mainTag.style.top = -1 * currentScroll + "px";
 
-	let cursorCurrentX = 0,
-		cursorCurrentY = 0;
-	let cursorOuterCurrentX = 0,
-		cursorOuterCurrentY = 0;
-	let cursorAimX = 0,
-		cursorAimY = 0;
+			figcaptions.forEach((caption) => {
+				const box = caption.getBoundingClientRect();
+				const midY = box.y + box.height / 2;
+				const midScreen = window.innerHeight / 2;
+				const diff = midY - midScreen;
 
-	const changeCursor = () => {
-		cursorCurrentX = cursorCurrentX + (cursorAimX - cursorCurrentX) * 0.1;
-		cursorCurrentY = cursorCurrentY + (cursorAimY - cursorCurrentY) * 0.1;
+				const images = caption.querySelectorAll("img");
+				images.forEach((image, i) => {
+					const speed = 0.1 + 0.1 * i;
+					image.style.top = diff * speed + "px";
+				});
+			});
 
-		cursor.style.left = cursorCurrentX + "px";
-		cursor.style.top = cursorCurrentY + "px";
+			requestAnimationFrame(changeScroll);
+		};
 
-		cursorOuterCurrentX =
-			cursorOuterCurrentX + (cursorAimX - cursorCurrentX) * 0.1;
-		cursorOuterCurrentY =
-			cursorOuterCurrentY + (cursorAimY - cursorCurrentY) * 0.1;
+		window.addEventListener("scroll", () => {
+			aimScroll += window.scrollY;
+		});
 
-		cursorOuter.style.left = cursorOuterCurrentX + "px";
-		cursorOuter.style.top = cursorOuterCurrentY + "px";
+		changeScroll();
 
-		requestAnimationFrame(changeCursor);
-	};
+		let cursorCurrentX = 0,
+			cursorCurrentY = 0;
+		let cursorOuterCurrentX = 0,
+			cursorOuterCurrentY = 0;
+		let cursorAimX = 0,
+			cursorAimY = 0;
 
-	document.addEventListener("mousemove", (event) => {
-		cursorAimX = event.pageX;
-		cursorAimY = event.pageY;
-	});
+		const changeCursor = () => {
+			cursorCurrentX = cursorCurrentX + (cursorAimX - cursorCurrentX) * 0.1;
+			cursorCurrentY = cursorCurrentY + (cursorAimY - cursorCurrentY) * 0.1;
 
-	changeCursor();
-}
+			cursor.style.left = cursorCurrentX + "px";
+			cursor.style.top = cursorCurrentY + "px";
+
+			cursorOuterCurrentX =
+				cursorOuterCurrentX + (cursorAimX - cursorCurrentX) * 0.1;
+			cursorOuterCurrentY =
+				cursorOuterCurrentY + (cursorAimY - cursorCurrentY) * 0.1;
+
+			cursorOuter.style.left = cursorOuterCurrentX + "px";
+			cursorOuter.style.top = cursorOuterCurrentY + "px";
+
+			requestAnimationFrame(changeCursor);
+		};
+
+		document.addEventListener("mousemove", (event) => {
+			cursorAimX = event.pageX;
+			cursorAimY = event.pageY;
+		});
+
+		changeCursor();
+	}
+};
+
+runScripts();
+mq.addListener(() => {
+	runScripts();
+});
