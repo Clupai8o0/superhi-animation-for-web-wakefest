@@ -59,8 +59,26 @@ if (motion.matches && large.matches) {
 
 	changeScroll();
 
+	let cursorCurrentX = 0,
+		cursorCurrentY = 0;
+	let cursorAimX = 0,
+		cursorAimY = 0;
+
+	const changeCursor = () => {
+  
+		cursorCurrentX = cursorCurrentX + (cursorAimX - cursorCurrentX) * 0.1;
+		cursorCurrentY = cursorCurrentY + (cursorAimY - cursorCurrentY) * 0.1;
+
+		cursor.style.left = cursorCurrentX + "px";
+		cursor.style.top = cursorCurrentY + "px";
+
+		requestAnimationFrame(changeCursor);
+	};
+
 	document.addEventListener("mousemove", (event) => {
-		cursor.style.left = event.pageX + "px";
-		cursor.style.top = event.pageY + "px";
+		cursorAimX = event.pageX;
+		cursorAimY = event.pageY;
 	});
+
+	changeCursor();
 }
