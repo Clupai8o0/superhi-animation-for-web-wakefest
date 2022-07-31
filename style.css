@@ -1,5 +1,14 @@
 @import url(https://fonts.googleapis.com/css?family=Pacifico:regular);
 
+@keyframes rotate {
+	from {
+		transform: translate(-50%, -50%) rotate(0deg);
+	}
+	to {
+		transform: translate(-50%, -50%) rotate(360deg);
+	}
+}
+
 * {
 	font-family: Pacifico, Georgia, "Times New Roman", Times, serif;
 	font-size: 24px;
@@ -101,6 +110,10 @@ figcaption img:nth-child(3) {
 	transition-delay: 1.5s;
 }
 
+div.cursor, div.cursor-outer{
+  display: none;
+}
+
 @media (prefers-reduced-motion: no-preference) and (min-width: 600px) {
 	body,
 	a,
@@ -109,25 +122,28 @@ figcaption img:nth-child(3) {
 	}
 
 	div.cursor {
-    position: absolute;
-    top: 32px;
-    left: 32px;
-    width: 20px;
-    height: 20px;
-    background-image: url(assets/cursor.svg);
-    pointer-events: none;
-    transform: translate(-50%, -50%);
+    display: block;
+		position: absolute;
+		top: 32px;
+		left: 32px;
+		width: 20px;
+		height: 20px;
+		background-image: url(assets/cursor.svg);
+		pointer-events: none;
+		transform: translate(-50%, -50%);
 	}
 
-  div.cursor-outer {
-    position: absolute;
-    top: 32px;
-    left: 32px;
-    width: 100px;
-    height: 100px;
-    background-image: url(assets/rotating-cursor.png);
-    background-size: 100px 100px;
-    pointer-events: none;
-    transform: translate(0%, -15%);
+	div.cursor-outer {
+    display: block;
+		position: absolute;
+		top: 32px;
+		left: 32px;
+		width: 100px;
+		height: 100px;
+		background-image: url(assets/rotating-cursor.png);
+		background-size: 100px 100px;
+		pointer-events: none;
+		transform: translate(-50%, -50%);
+		animation: rotate 20s infinite;
 	}
 }
