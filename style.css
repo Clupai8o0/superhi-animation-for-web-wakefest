@@ -1,62 +1,84 @@
 @import url(https://fonts.googleapis.com/css?family=Pacifico:regular);
 
 * {
-  font-family: Pacifico, Georgia, 'Times New Roman', Times, serif;
-  font-size: 24px;
-  line-height: 1.25;
-  color: black;
-  margin: 0;
-  box-sizing: border-box;
+	font-family: Pacifico, Georgia, "Times New Roman", Times, serif;
+	font-size: 24px;
+	line-height: 1.25;
+	color: black;
+	margin: 0;
+	box-sizing: border-box;
 }
 
 main {
-  border: 10px solid red;
+	border: 10px solid red;
 }
 
 header {
-  background-color: #f2dd00;
-  padding: 48px;
+	background-color: #f2dd00;
+	padding: 48px;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 header h1 img {
-  max-width: 265px;
+	max-width: 265px;
 }
 
 header nav {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 header nav a {
-  margin: 0 0 0 24px;
+	margin: 0 0 0 24px;
 }
 
 section {
-  padding: 96px;
+	padding: 96px;
 }
 
 section.yellow {
-  background-color: #f2dd00;
+	background-color: #f2dd00;
 }
 section.salmon {
-  background-color: #f09291;
+	background-color: #f09291;
 }
 section.bay-blue {
-  background-color: #bee3f8;
+	background-color: #bee3f8;
 }
 
 h2 {
-  font-size: 96px;
-  text-align: center;
-  max-width: 10em;
-  margin: 0 auto;
+	font-size: 96px;
+	text-align: center;
+	max-width: 10em;
+	margin: 0 auto;
 }
 
 figure {
-  max-width: 700px;
-  margin: 0 auto;
+	max-width: 700px;
+	margin: 0 auto;
+	position: relative;
+}
+
+figcaption {
+	position: absolute;
+	top: 70%;
+	left: 100%;
+	width: 100%;
+	transform: translate(-50%, -50%);
+}
+
+section.salmon figcaption {
+	left: 0;
+}
+
+figcaption img {
+	opacity: 0;
+  transition: opacity 1s;
+}
+
+figcaption.in-view img {
+	opacity: 1;
 }
