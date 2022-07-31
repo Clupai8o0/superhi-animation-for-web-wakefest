@@ -6,9 +6,9 @@ const motion = window.matchMedia("(prefers-reduced-motion: no-preference)");
 const large = window.matchMedia("(min-width: 600px)");
 
 if (motion.matches && large.matches) {
-	mainTag.style.position = "fixed";
-	mainTag.style.top = "0";
-	mainTag.style.left = "0";
+	// mainTag.style.position = "fixed";
+	// mainTag.style.top = "0";
+	// mainTag.style.left = "0";
 	mainTag.style.width = "100%";
 
 	const observer = new IntersectionObserver(
@@ -32,7 +32,7 @@ if (motion.matches && large.matches) {
 
 	const changeScroll = function () {
 		bodyTag.style.height = mainTag.offsetHeight + "px";
-		currentScroll = currentScroll + (aimScroll - currentScroll) * 0.05;
+		currentScroll = currentScroll + (aimScroll - currentScroll) * 0.0005;
 
 		mainTag.style.top = -1 * currentScroll + "px";
 
