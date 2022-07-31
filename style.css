@@ -11,10 +11,6 @@
 
 main {
   border: 10px solid red;
-  position: fixed;
-  top: -2000px;
-  left: 0;
-  width: 100%;
 }
 
 header {
