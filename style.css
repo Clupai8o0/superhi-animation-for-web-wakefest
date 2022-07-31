@@ -116,5 +116,18 @@ figcaption img:nth-child(3) {
     height: 20px;
     background-image: url(assets/cursor.svg);
     pointer-events: none;
+    transform: translate(-50%, -50%);
+	}
+
+  div.cursor-outer {
+    position: absolute;
+    top: 32px;
+    left: 32px;
+    width: 100px;
+    height: 100px;
+    background-image: url(assets/rotating-cursor.png);
+    background-size: 100px 100px;
+    pointer-events: none;
+    transform: translate(0%, -15%);
 	}
 }

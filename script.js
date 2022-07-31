@@ -1,7 +1,9 @@
 const mainTag = document.querySelector("main");
 const bodyTag = document.querySelector("body");
 const figcaptions = document.querySelectorAll("figcaption");
+
 const cursor = document.querySelector("div.cursor");
+const cursorOuter = document.querySelector("div.cursor-outer");
 
 const motion = window.matchMedia("(prefers-reduced-motion: no-preference)");
 const large = window.matchMedia("(min-width: 600px)");
@@ -61,16 +63,25 @@ if (motion.matches && large.matches) {
 
 	let cursorCurrentX = 0,
 		cursorCurrentY = 0;
+	let cursorOuterCurrentX = 0,
+		cursorOuterCurrentY = 0;
 	let cursorAimX = 0,
 		cursorAimY = 0;
 
 	const changeCursor = () => {
-  
 		cursorCurrentX = cursorCurrentX + (cursorAimX - cursorCurrentX) * 0.1;
 		cursorCurrentY = cursorCurrentY + (cursorAimY - cursorCurrentY) * 0.1;
 
 		cursor.style.left = cursorCurrentX + "px";
 		cursor.style.top = cursorCurrentY + "px";
+
+		cursorOuterCurrentX =
+			cursorOuterCurrentX + (cursorAimX - cursorCurrentX) * 0.1;
+		cursorOuterCurrentY =
+			cursorOuterCurrentY + (cursorAimY - cursorCurrentY) * 0.1;
+
+		cursorOuter.style.left = cursorOuterCurrentX + "px";
+		cursorOuter.style.top = cursorOuterCurrentY + "px";
 
 		requestAnimationFrame(changeCursor);
 	};
