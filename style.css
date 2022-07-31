@@ -71,9 +71,9 @@ figcaption {
 }
 
 figcaption:before {
-  content: "";
-  padding: 160% 0 0 0;
-  display: block;
+	content: "";
+	padding: 160% 0 0 0;
+	display: block;
 }
 
 section.salmon figcaption {
@@ -81,13 +81,13 @@ section.salmon figcaption {
 }
 
 figcaption img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  max-width: 500px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	max-width: 500px;
 	opacity: 0;
-  transition: opacity 0.5s 0.5s;
+	transition: opacity 0.5s 0.5s;
 }
 
 figcaption.in-view img {
@@ -95,8 +95,26 @@ figcaption.in-view img {
 }
 
 figcaption img:nth-child(2) {
-  transition-delay: 1s;
+	transition-delay: 1s;
 }
 figcaption img:nth-child(3) {
-  transition-delay: 1.5s;
+	transition-delay: 1.5s;
+}
+
+@media (prefers-reduced-motion: no-preference) and (min-width: 600px) {
+	body,
+	a,
+	a:hover {
+		cursor: none;
+	}
+
+	div.cursor {
+    position: absolute;
+    top: 32px;
+    left: 32px;
+    width: 20px;
+    height: 20px;
+    background-image: url(assets/cursor.svg);
+    pointer-events: none;
+	}
 }

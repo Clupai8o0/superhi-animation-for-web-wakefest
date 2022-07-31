@@ -1,6 +1,7 @@
 const mainTag = document.querySelector("main");
 const bodyTag = document.querySelector("body");
 const figcaptions = document.querySelectorAll("figcaption");
+const cursor = document.querySelector("div.cursor");
 
 const motion = window.matchMedia("(prefers-reduced-motion: no-preference)");
 const large = window.matchMedia("(min-width: 600px)");
@@ -57,4 +58,9 @@ if (motion.matches && large.matches) {
 	});
 
 	changeScroll();
+
+	document.addEventListener("mousemove", (event) => {
+		cursor.style.left = event.pageX + "px";
+		cursor.style.top = event.pageY + "px";
+	});
 }
