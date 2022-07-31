@@ -1,25 +1,30 @@
 const mainTag = document.querySelector("main");
 const bodyTag = document.querySelector("body");
 
-mainTag.style.position = "fixed";
-mainTag.style.top = "0";
-mainTag.style.left = "0";
-mainTag.style.width = "100%";
+const motion = window.matchMedia("(prefers-reduced-motion: no-preference)");
+const large = window.matchMedia("(min-width: 600px)");
 
-let currentScroll = 0;
-let aimScroll = 0;
+if (motion.matches && large.matches) {
+	mainTag.style.position = "fixed";
+	mainTag.style.top = "0";
+	mainTag.style.left = "0";
+	mainTag.style.width = "100%";
 
-const changeScroll = function () {
-	bodyTag.style.height = mainTag.offsetHeight + "px";
-	currentScroll = currentScroll + (aimScroll - currentScroll) * 0.05;
+	let currentScroll = 0;
+	let aimScroll = 0;
 
-	mainTag.style.top = -1 * currentScroll + "px";
+	const changeScroll = function () {
+		bodyTag.style.height = mainTag.offsetHeight + "px";
+		currentScroll = currentScroll + (aimScroll - currentScroll) * 0.05;
 
-	requestAnimationFrame(changeScroll);
-};
+		mainTag.style.top = -1 * currentScroll + "px";
 
-window.addEventListener("scroll", () => {
-	aimScroll += window.scrollY;
-});
+		requestAnimationFrame(changeScroll);
+	};
 
-changeScroll();
+	window.addEventListener("scroll", () => {
+		aimScroll += window.scrollY;
+	});
+
+	changeScroll();
+}
