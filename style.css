@@ -44,22 +44,20 @@ header nav a {
 	margin: 0 0 0 24px;
 	text-decoration: none;
 	position: relative;
+	padding: 0 0 20px 0;
 }
 
-header nav a:before {
-	content: "";
+header nav a img {
 	position: absolute;
 	bottom: 0;
 	left: 50%;
-	width: 0%;
-	height: 2px;
-	background-color: red;
+	transform: translate(-50%, 0);
+	clip-path: polygon(0 0, 0 100%, 0 100%, 0 0);
 	transition: all 1s;
 }
 
-header nav a:hover:before {
-	left: 0;
-	width: 100%;
+header nav a:hover img {
+	clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
 }
 
 section {
