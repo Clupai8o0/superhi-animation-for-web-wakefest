@@ -36,6 +36,19 @@ if (motion.matches && large.matches) {
 
 		mainTag.style.top = -1 * currentScroll + "px";
 
+		figcaptions.forEach((caption) => {
+			const box = caption.getBoundingClientRect();
+			const midY = box.y + box.height / 2;
+			const midScreen = window.innerHeight / 2;
+			const diff = midY - midScreen;
+
+			const images = caption.querySelectorAll("img");
+			images.forEach((image, i) => {
+				const speed = 0.1 + 0.1 * i;
+				image.style.top = diff * speed + "px";
+			});
+		});
+
 		requestAnimationFrame(changeScroll);
 	};
 
